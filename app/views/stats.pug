@@ -87,23 +87,23 @@ html
                 td #{val}
 
         article.half
-          h2 Page Views:
+          h2 Page Views (Unique):
           table
             tr
               th Page
               th Visits
             tr
               td.widetable Homepage
-              td= visits.index
+              td= visits.index.length
             tr
               td.widetable About
-              td= visits.about
+              td= visits.about.length
             tr
               td.widetable Gallery
-              td= visits.gallery
+              td= visits.gallery.length
             tr
               td.widetable Palate
-              td= visits.menu
+              td= visits.palate.length
 
 
 

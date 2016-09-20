@@ -4,19 +4,11 @@ var app = express();
 var path = require('path');
 var favicon = require('serve-favicon');
 
-var visits = {
-  index: 1,
-  about: 1,
-  gallery: 1,
-  menu: 1
-};
-
 var data = {
   visits: {
-    index: 1,
-    about: 1,
-    gallery: 1,
-    menu: 1
+    index: [],
+    about: [],
+    gallery: [],
   },
   referrers: {
     index: {},
@@ -39,36 +31,44 @@ app.use(express.static(path.join(__dirname, 'public/')));
 //Routing
 
 app.get('/', function(req,res){
-  res.sendFile(path.join(__dirname+'/app/index.html'));
-  console.log('Index Visits: ' + data.visits.index++);
   //__dirname : It will resolve to your project folder.
+  res.sendFile(path.join(__dirname+'/app/index.html'));
+
+  //Adds to visit count. Unique visits only.
+  addVisitor(req, "index");
 
   //Adds a the referring URL.
   addRef(req.get('Referrer'), "index");
 });
 
 app.get('/about', function(req,res){
-  res.sendFile(path.join(__dirname+'/app/about.html'));
-  console.log('About Visits: ' + data.visits.about++);
   //__dirname : It will resolve to your project folder.
+  res.sendFile(path.join(__dirname+'/app/about.html'));
+
+  //Adds to visit count. Unique visits only.
+  addVisitor(req, "about");
 
   //Adds a the referring URL.
   addRef(req.get('Referrer'), "about");
 });
 
 app.get('/gallery', function(req,res){
-  res.sendFile(path.join(__dirname+'/app/gallery.html'));
-  console.log('Gallery Visits: ' + data.visits.gallery++);
   //__dirname : It will resolve to your project folder.
+  res.sendFile(path.join(__dirname+'/app/gallery.html'));
+
+  //Adds to visit count. Unique visits only.
+  addVisitor(req, "gallery");
 
   //Adds a the referring URL.
   addRef(req.get('Referrer'), "gallery");
 });
 
 app.get('/palate', function(req,res){
-  res.sendFile(path.join(__dirname+'/app/palate.html'));
-  console.log('Palate Visits: ' + data.visits.menu++);
   //__dirname : It will resolve to your project folder.
+  res.sendFile(path.join(__dirname+'/app/palate.html'));
+
+  //Adds to visit count. Unique visits only.
+  addVisitor(req, "palate");
 
   //Adds a the referring URL.
   addRef(req.get('Referrer'), "palate");
@@ -82,14 +82,21 @@ app.get('/stats', function(req, res) {
 function addRef(url, page) {
   if(data.referrers[page][url] == null) {
     data.referrers[page][url] = 1;
-    console.log("data.referrers[" + page + "][" + url + "] = " + data.referrers[page][url]);
     return true;
   }
   else {
     data.referrers[page][url]++;
-    console.log("data.referrers[" + page + "][" + url + "] = " + data.referrers[page][url]);
     return true;
   }
+}
+
+function addVisitor(req, page) {
+  var ip = req.headers['x-forwarded-for'] || req.connection.remoteAddress;
+  if(data.visits[page].indexOf(ip) == -1) {
+    data.visits[page].push(ip);
+    return true;
+  }
+  return false;
 }
 
 app.listen(80, function () {
