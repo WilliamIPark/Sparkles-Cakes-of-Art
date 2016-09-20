@@ -9,6 +9,7 @@ var data = {
     index: [],
     about: [],
     gallery: [],
+    palate: []
   },
   referrers: {
     index: {},
