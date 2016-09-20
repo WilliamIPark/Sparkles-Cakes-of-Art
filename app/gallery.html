@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <!-- Meta information -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=0.9">
+
+    <title>Sparkles Cakes of Art</title>
+
+    <!-- Custom Styling -->
+    <link rel="stylesheet" type="text/css" href="css/normalize.css">
+    <link rel="stylesheet" type="text/css" href="css/style.css">
+    <link rel="stylesheet" type="text/css" href="css/gallery.css">
+
+    <!-- Typekit Script -->
+    <script src="https://use.typekit.net/cgr2hwq.js"></script>
+    <script>try{Typekit.load({ async: false });}catch(e){}</script>
+
+    <!-- JQuery -->
+    <script src="https://code.jquery.com/jquery-3.1.0.min.js"
+            integrity="sha256-cCueBR6CsyA4/9szpPfrX3s49M9vUU5BgtiJj06wt/s="
+            crossorigin="anonymous">
+    </script>
+
+    <!-- Gallery related stuff -->
+    <script src="https://npmcdn.com/masonry-layout@4.1.1/dist/masonry.pkgd.min.js"></script>
+    <script src="https://npmcdn.com/imagesloaded@4.1/imagesloaded.pkgd.min.js"></script>
+    <script src="js/gallery.js"></script>
+
+  </head>
+
+  <body>
+    <header>
+      <nav class="main-nav wrapper">
+        <div class="nav-left">
+          <a href="/">Home</a>
+          <a href="about">About</a>
+        </div>
+        <img src="img/logo.png" alt="Sparkles Cakes of Art Logo" class="logo"/>
+        <div class="nav-right">
+          <a href="gallery">Gallery</a>
+          <a href="palate">Palate</a>
+        </div>
+      </nav>
+    </header>
+
+    <main class="card main-wrapper" id="main">
+      <h1 class="main-headline">Gallery</h1>
+      <nav class="sub-nav">
+        <h2><a href="#main" class="cat-trigger" id="weddings">Weddings</a></h2>
+        <h2><a href="#main" class="cat-trigger" id="birthdays">Birthdays</a></h2>
+        <h2><a href="#main" class="cat-trigger" id="christenings">Christenings</a></h2>
+        <h2><a href="#main" class="cat-trigger" id="offer">Simplicity Offer</a></h2>
+      </nav>
+
+      <section class="gallery" id="gallery">
+        <!-- <div class="grid-sizer"></div> -->
+        <!-- This is dynamically populated by gallery.js -->
+
+      </section>
+    </main>
+    <footer class="card footer-wrapper">
+      <p> &copy; Copyright 2016 - Sparkles Cakes of Art</p>
+      <p><a href="http://williamipark.github.io/Portfolio-Website/index.html">Website by William Park</a></p>
+    </footer>
+  </body>
+</html>

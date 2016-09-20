@@ -1,0 +1,113 @@
+doctype html
+html
+  head
+    // Meta information
+    meta(charset='utf-8')
+    meta(name='viewport', content='width=device-width, initial-scale=0.9')
+    title Sparkles Cakes of Art
+    // Custom Styling
+    link(rel='stylesheet', type='text/css', href='css/normalize.css')
+    link(rel='stylesheet', type='text/css', href='css/style.css')
+    // Typekit Script
+    script(src='https://use.typekit.net/cgr2hwq.js')
+    script.
+      try{Typekit.load({ async: false });}catch(e){}
+  body
+    header
+      nav.main-nav.wrapper
+        .nav-left
+          a(href='/') Home
+          a(href='about') About
+        img.logo(src='img/logo.png', alt='Sparkles Cakes of Art Logo')
+        .nav-right
+          a(href='gallery') Gallery
+          a(href='palate') Palate
+    main.card.main-wrapper
+      h1.main-headline Statistics
+      section.flex
+        article.half
+          h2 Traffic Visiting Homepage:
+          table
+            tr
+              th.widetable Came From
+              th Visits
+            -var index = 0
+            each val, key in referrers.index
+              tr
+                td.widetable
+                  if key == "undefined"
+                    a(href='#') Direct Visit
+                  else
+                    a(href=key) #{key}
+                td #{val}
+
+          h2 Traffic Visiting About:
+          table
+            tr
+              th.widetable Came From
+              th Visits
+            -var index = 0
+            each val, key in referrers.about
+              tr
+                td.widetable
+                  if key == "undefined"
+                    a(href='#') Direct Visit
+                  else
+                    a(href=key) #{key}
+                td #{val}
+
+          h2 Traffic Visiting Gallery:
+          table
+            tr
+              th.widetable Came From
+              th Visits
+            -var index = 0
+            each val, key in referrers.gallery
+              tr
+                td.widetable
+                  if key == "undefined"
+                    a(href='#') Direct Visit
+                  else
+                    a(href=key) #{key}
+                td #{val}
+
+          h2 Traffic Visiting Palate:
+          table
+            tr
+              th.widetable Came From
+              th Visits
+            -var index = 0
+            each val, key in referrers.palate
+              tr
+                td.widetable
+                  if key == "undefined"
+                    a(href='#') Direct Visit
+                  else
+                    a(href=key) #{key}
+                td #{val}
+
+        article.half
+          h2 Page Views:
+          table
+            tr
+              th Page
+              th Visits
+            tr
+              td.widetable Homepage
+              td= visits.index
+            tr
+              td.widetable About
+              td= visits.about
+            tr
+              td.widetable Gallery
+              td= visits.gallery
+            tr
+              td.widetable Palate
+              td= visits.menu
+
+
+
+    footer.card.footer-wrapper
+      p  © Copyright 2016 - Sparkles Cakes of Art
+      p
+        a(href='http://williamipark.github.io/Portfolio-Website/index.html') Website by William Park
