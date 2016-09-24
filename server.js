@@ -3,7 +3,14 @@ var express = require('express');
 var app = express();
 var path = require('path');
 var favicon = require('serve-favicon');
+var mongoose = require('mongoose');
+var stats = require("./app/controllers/stats.js");
 
+//Connect to DB
+dbOptions = { promiseLibrary: require('bluebird') };
+mongoose.createConnection("mongodb://localhost/sparkles", dbOptions);
+
+//Set up data object to pass into view engine.
 var data = {
   visits: {
     index: [],
@@ -30,6 +37,13 @@ app.use(favicon(path.join(__dirname,'public','img','favicon.ico')));
 app.use(express.static(path.join(__dirname, 'public/')));
 
 //Routing
+
+app.get('/test', function(req,res){
+  //__dirname : It will resolve to your project folder.
+  res.sendFile(path.join(__dirname+'/app/index.html'));
+
+  console.log(stats.newVisit("127.0.0.1", "index"));
+});
 
 app.get('/', function(req,res){
   //__dirname : It will resolve to your project folder.
