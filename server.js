@@ -3,12 +3,7 @@ var express = require('express');
 var app = express();
 var path = require('path');
 var favicon = require('serve-favicon');
-var mongoose = require('mongoose');
-var stats = require("./app/controllers/stats.js");
 
-//Connect to DB
-dbOptions = { promiseLibrary: require('bluebird') };
-mongoose.createConnection("mongodb://localhost/sparkles", dbOptions);
 
 //Set up data object to pass into view engine.
 var data = {
