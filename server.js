@@ -4,6 +4,8 @@ var app = express();
 var path = require('path');
 var favicon = require('serve-favicon');
 
+
+//Set up data object to pass into view engine.
 var data = {
   visits: {
     index: [],
@@ -30,7 +32,6 @@ app.use(favicon(path.join(__dirname,'public','img','favicon.ico')));
 app.use(express.static(path.join(__dirname, 'public/')));
 
 //Routing
-
 app.get('/', function(req,res){
   //__dirname : It will resolve to your project folder.
   res.sendFile(path.join(__dirname+'/app/index.html'));
@@ -39,7 +40,7 @@ app.get('/', function(req,res){
   addVisitor(req, "index");
 
   //Adds a the referring URL.
-  addRef(req, req.get('Referrer'), "index");
+  addRef(req.get('Referrer'), "index");
 });
 
 app.get('/about', function(req,res){
@@ -50,7 +51,7 @@ app.get('/about', function(req,res){
   addVisitor(req, "about");
 
   //Adds a the referring URL.
-  addRef(req, req.get('Referrer'), "about");
+  addRef(req.get('Referrer'), "about");
 });
 
 app.get('/gallery', function(req,res){
@@ -61,7 +62,7 @@ app.get('/gallery', function(req,res){
   addVisitor(req, "gallery");
 
   //Adds a the referring URL.
-  addRef(req, req.get('Referrer'), "gallery");
+  addRef(req.get('Referrer'), "gallery");
 });
 
 app.get('/palate', function(req,res){
@@ -72,7 +73,7 @@ app.get('/palate', function(req,res){
   addVisitor(req, "palate");
 
   //Adds a the referring URL.
-  addRef(req, req.get('Referrer'), "palate");
+  addRef(req.get('Referrer'), "palate");
 });
 
 app.get('/stats', function(req, res) {
@@ -80,30 +81,21 @@ app.get('/stats', function(req, res) {
 });
 
 //Adds referrals for stats page.
-function addRef(req, url, page) {
-  var ip = req.headers['x-forwarded-for'] || req.connection.remoteAddress;
+function addRef(url, page) {
   if(data.referrers[page][url] == null) {
-    data.referrers[page][url] = [];
-    data.referrers[page][url].push(ip);
-    data.referrers[page][url].sort();
+    data.referrers[page][url] = 1;
     return true;
   }
   else {
-    if(data.referrers[page][url].indexOf(ip) == -1) {
-      data.referrers[page][url].push(ip);
-      data.referrers[page][url].sort();
-      return true;
-    }
-    return false;
+    data.referrers[page][url]++;
+    return true;
   }
 }
 
-//Adds new visitors and checks they're unique by IP address.
 function addVisitor(req, page) {
   var ip = req.headers['x-forwarded-for'] || req.connection.remoteAddress;
   if(data.visits[page].indexOf(ip) == -1) {
     data.visits[page].push(ip);
-    data.visits[page].sort();
     return true;
   }
   return false;
