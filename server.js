@@ -32,14 +32,6 @@ app.use(favicon(path.join(__dirname,'public','img','favicon.ico')));
 app.use(express.static(path.join(__dirname, 'public/')));
 
 //Routing
-
-app.get('/test', function(req,res){
-  //__dirname : It will resolve to your project folder.
-  res.sendFile(path.join(__dirname+'/app/index.html'));
-
-  console.log(stats.newVisit("127.0.0.1", "index"));
-});
-
 app.get('/', function(req,res){
   //__dirname : It will resolve to your project folder.
   res.sendFile(path.join(__dirname+'/app/index.html'));
